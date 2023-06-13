@@ -30,3 +30,9 @@ jobs:
      with:
        Environment: ${{ github.event.inputs.Environment }}
        Version: ${{ github.event.inputs.Version }}
+  
+  Load_Test_K6:
+        needs: Common_Deploy
+        uses: shiyamsundark/DevOpsCommon-Mule/.github/workflows/loadtest.yml@main
+        with:
+             repository: ${{ inputs.Repository }}
