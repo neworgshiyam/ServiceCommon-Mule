@@ -1,0 +1,23 @@
+name:  Common_MuleDeploy_Stage
+on:
+  workflow_dispatch:
+   inputs:
+    Version:
+          type: string  
+    Environment:
+          type: choice
+          options:
+            - stg
+  
+permissions:
+    contents: write
+    packages: write
+    actions: write
+    id-token: write
+    
+jobs: 
+  Common_Deploy:
+     uses: shiyamsundark/DevOpsCommon-Mule/.github/workflows/Deploy.yml@main
+     with:
+       Environment: ${{ github.event.inputs.Environment }}
+       Version: ${{ github.event.inputs.Version }}
