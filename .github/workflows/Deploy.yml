@@ -21,8 +21,8 @@ jobs:
     name: Dev-APPROVAL
     environment: Test-Dev
     steps:
-      - name: Dev Approval
-        run: echo "Dev Approved"y
+      - name: Devops Approval
+        run: echo "Devops Approved"
         
   Common_Deploy:
      needs: Mule_Deploy_Stage_Approval
