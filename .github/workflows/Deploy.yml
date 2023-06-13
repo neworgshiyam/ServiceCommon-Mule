@@ -18,7 +18,7 @@ permissions:
 jobs: 
   Mule_Deploy_Stage_Approval:
     runs-on: ubuntu-latest
-    name: Dev-APPROVAL
+    name: Devops-APPROVAL
     environment: Test-Dev
     steps:
       - name: Devops Approval
