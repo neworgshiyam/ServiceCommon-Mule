@@ -16,7 +16,16 @@ permissions:
     id-token: write
     
 jobs: 
+  Mule_Deploy_Stage_Approval:
+    runs-on: ubuntu-latest
+    name: Dev-APPROVAL
+    environment: Test-Dev
+    steps:
+      - name: Dev Approval
+        run: echo "Dev Approved"y
+        
   Common_Deploy:
+     needs: Mule_Deploy_Stage_Approval
      uses: shiyamsundark/DevOpsCommon-Mule/.github/workflows/Deploy.yml@main
      with:
        Environment: ${{ github.event.inputs.Environment }}
