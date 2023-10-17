@@ -1,0 +1,35 @@
+name: ServiceCommon-Mule
+on:
+  repository_dispatch:
+    types: 
+      - ServiceCommon-Mule
+  workflow_dispatch:
+permissions:
+    contents: write
+    packages: write
+    actions: write
+    id-token: write
+jobs: 
+  Set_Input_Variables:
+    runs-on: ubuntu-latest
+    outputs:
+        Version: ${{ steps.Input_Parameter.outputs.Version }}
+        Repository: ${{ steps.Input_Parameter.outputs.Repository }}
+    env:
+        Repository: ${{ github.event.client_payload.Repo }} 
+        Version: ${{ github.event.client_payload.Version }}
+    steps:
+      - name: Input Parameter
+        id: Input_Parameter
+        run: |
+             echo "Version: ${{ env.Version }}"
+             echo "Repository: ${{ env.Repository }}"
+              echo "Version=$Version" >> $GITHUB_OUTPUT
+             echo "Repository=$Repository" >> $GITHUB_OUTPUT
+        
+  Service1_Deploy:
+     needs: Set_Input_Variables
+     name: Mule-Build-Deploy
+     uses: neworgshiyam/DevOpsCommon-Mule/.github/workflows/Build_Deploy.yml@main
+     with:
+       Repository: ${{ github.repository }}
